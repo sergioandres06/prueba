@@ -2,7 +2,9 @@ $(document).ready(function () {
   var timeData = [],
     temperatureData = [],
     humidityData = [];
-  var data = {
+    panesData =[];
+    tortasData = [];
+    var data = {
     labels: timeData,
     datasets: [
       {
@@ -17,6 +19,28 @@ $(document).ready(function () {
         data: temperatureData
       },
       {
+	fill: false,
+        label: 'panes',
+	yAxisID: 'panes',
+	borderColor: "rgba(210, 110, 110, 1)",
+	pointBoarderColor: "rgba(210, 110, 110, 1)",
+	backgroundColor: "rgba(210, 110, 110, 0.4)",
+	pointHoverBackgroundColor: "rgba(210, 110, 110, 1)",
+        pointHoverBorderColor: "rgba(210, 110, 110, 1)",
+	data: panesData
+      },
+      {
+	fill: false,
+        label: 'tortas',
+	yAxisID: 'tortas',
+	borderColor: "rgba(110, 210, 110, 1)",
+	pointBoarderColor: "rgba(110, 210, 110, 1)",
+	backgroundColor: "rgba(110, 210, 110, 0.4)",
+	pointHoverBackgroundColor: "rgba(110, 210, 110, 1)",
+        pointHoverBorderColor: "rgba(110, 210, 110, 1)",
+	data: tortasData
+      },
+      {
         fill: false,
         label: 'Humidity',
         yAxisID: 'Humidity',
@@ -26,8 +50,7 @@ $(document).ready(function () {
         pointHoverBackgroundColor: "rgba(24, 120, 240, 1)",
         pointHoverBorderColor: "rgba(24, 120, 240, 1)",
         data: humidityData
-      }
-    ]
+      }]
   }
 
   var basicOption = {
@@ -52,8 +75,26 @@ $(document).ready(function () {
             labelString: 'Humidity(%)',
             display: true
           },
-          position: 'right'
-        }]
+          position: 'right',
+        },
+   {
+        id: 'panes',
+        type: 'linear',
+        scaleLabel: {
+          labelString: 'panes',
+          display: true
+        },
+        position: 'left',
+      },
+      {
+        id: 'tortas',
+        type: 'linear',
+        scaleLabel: {
+          labelString: 'tortas',
+          display: true
+        },
+        position: 'left'
+      }]
     }
   }
 
@@ -85,8 +126,29 @@ $(document).ready(function () {
       if (len > maxLen) {
         timeData.shift();
         temperatureData.shift();
+      } 
+      if(!obj.time || !obj.panes) {
+        return;
       }
-
+      timeData.push(obj.time);
+      panesData.push(obj.panes);
+      // only keep no more than 50 points in the line chart
+      const maxLen = 50;
+      if (len > maxLen) {
+      timeData.shift();
+      panesData.shift();
+      }
+      if(!obj.time || !obj.tortas) {
+        return;
+      }
+      timeData.push(obj.time);
+      tortasData.push(obj.tortas);
+      // only keep no more than 50 points in the line chart
+      const maxLen = 50;
+      if (len > maxLen) {
+      timeData.shift();
+      tortasData.shift();
+      }     	    	
       if (obj.humidity) {
         humidityData.push(obj.humidity);
       }
