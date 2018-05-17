@@ -11,11 +11,11 @@ $(document).ready(function () {
         fill: false,
         label: 'Temperature',
         yAxisID: 'Temperature',
-        borderColor: "rgba(0, 0, 0, 1)",
-        pointBoarderColor: "rgba(0, 0, 0, 1)",
-        backgroundColor: "rgba(0, 0, 0, 0.4)",
-        pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
-        pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        borderColor: "rgba(250, 0, 0, 1)",
+        pointBoarderColor: "rgba(250, 0, 0, 1)",
+        backgroundColor: "rgba(250, 0, 0, 0.4)",
+        pointHoverBackgroundColor: "rgba(250, 0, 0, 1)",
+        pointHoverBorderColor: "rgba(250, 0, 0, 1)",
         data: temperatureData
       },
       {
